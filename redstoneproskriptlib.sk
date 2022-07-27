@@ -1,0 +1,24 @@
+on load:
+ broadcast "&aRedstone_pro180's skript library loaded!"
+ 
+command /redstoneprosklib [<text>]:
+ trigger:
+  if arg is set:
+   if arg is "help" or "Help":
+    message "&aCOMMANDS:"
+    message "1. &a/redstonesklib - basic info about this skript library"
+    message "2. &a/redstonesklib version - shows version info"
+    message "3. &a/redstonesklib help - shows this text"
+   else if arg is "version" or "Version":
+    message "&aCurrent redstonesklib version: [development build] 1.0.0"
+  else:
+   message "&aWelcome to redstonesklib! a skript library used for most of my skripts!"
+   message "&aVersion: [development build] 1.0.0"
+   message "&aThis contains functions important for many of my future skripts."
+ 
+function brazil(player: player):
+ send "&cYOU ARE GOIN TO BRAZIL!!!!" to {_player}
+ apply levitation of tier 20 to {_player} for 10 seconds
+ wait 10 seconds
+ kill {_player}
+ broadcast "&c%{_player}% was sent to brazil :skull:"
