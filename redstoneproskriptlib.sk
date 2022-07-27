@@ -22,3 +22,11 @@ function brazil(player: player):
  wait 10 seconds
  kill {_player}
  broadcast "&c%{_player}% was sent to brazil :skull:"
+ 
+function sethome(player: player):
+ set {homeloc::%{_player}%} to {_player}'s location
+ send "&aSet Your home to <yellow>%{homeloc::%{_player}%}%!" to {_player}
+ 
+function home(player: player):
+ teleport {_player} to {homeloc::%{_player}%}
+ send "&aTeleported to home!" to {_player}
