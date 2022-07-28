@@ -10,10 +10,10 @@ command /redstoneprosklib [<text>]:
     message "2. &a/redstonesklib version - shows version info"
     message "3. &a/redstonesklib help - shows this text"
    else if arg is "version" or "Version":
-    message "&aCurrent redstonesklib version: [development build] 0.1.0"
+    message "&aCurrent redstonesklib version: [development build] 1.0.0"
   else:
    message "&aWelcome to redstonesklib! a skript library used for most of my skripts!"
-   message "&aVersion: [development build] 0.1.0"
+   message "&aVersion: [development build] 1.0.0"
    message "&aThis contains functions important for many of my future skripts."
  
 function brazil(player: player):
