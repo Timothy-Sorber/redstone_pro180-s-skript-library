@@ -30,3 +30,8 @@ function sethome(player: player):
 function home(player: player):
  teleport {_player} to {homeloc::%{_player}%}
  send "&aTeleported to home!" to {_player}
+ 
+function heal(player: player, executor: executor):
+ apply instant health of tier 255 to {_player}
+ send "&aYou have been healed!" to {_player}
+ send "&aHealed %{_player}%!" to {_executor}
