@@ -10,10 +10,10 @@ command /redstoneprosklib [<text>]:
     message "2. &a/redstonesklib version - shows version info"
     message "3. &a/redstonesklib help - shows this text"
    else if arg is "version" or "Version":
-    message "&aCurrent redstonesklib version: [development build] 1.0.0"
+    message "&aCurrent redstonesklib version: 1.0.0"
   else:
    message "&aWelcome to redstonesklib! a skript library used for most of my skripts!"
-   message "&aVersion: [development build] 1.0.0"
+   message "&aVersion: 1.0.0"
    message "&aThis contains functions important for many of my future skripts."
  
 function brazil(player: player):
@@ -31,12 +31,12 @@ function home(player: player):
  teleport {_player} to {homeloc::%{_player}%}
  send "&aTeleported to home!" to {_player}
  
-function heal(player: player, executor: executor):
+function heal(player: player, executor: player):
  apply instant health of tier 255 to {_player}
  send "&aYou have been healed!" to {_player}
  send "&aHealed %{_player}%!" to {_executor}
  
-function math(a: a, b: b, op: op):: number:
+function math(a: number, b: number, op: text) :: number:
  if {_op} is "add":
   set {_mathv} to {_a} + {_b}
  else if {_op} is "sub":
@@ -46,9 +46,12 @@ function math(a: a, b: b, op: op):: number:
  else if {_op} is "div":
   set {_mathv} to {_a} / {_b}
  return {_mathv}
-  
-function invis(player: player, seconds: seconds):
- apply invisibility tp {_player} for {_seconds} seconds
  
-function chat(msg: msg, player: player):
+function chat(msg: text, player: player):
  broadcast "<%{_player}%> %{_msg}%"
+ 
+function tell(msg: text, player: player):
+ send "%{_msg}%" to {_player}
+ 
+function clearlag():
+ make console execute command "/kill @e[type=item]"
