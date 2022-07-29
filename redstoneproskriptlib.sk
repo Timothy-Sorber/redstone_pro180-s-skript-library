@@ -1,19 +1,34 @@
 on load:
  broadcast "&aRedstone_pro180's skript library loaded!"
+ set {onlineplayers} to number of all players
+ 
+every 3 seconds:
+ set {onlineplayers} to number of all players
  
 command /redstoneprosklib [<text>]:
  trigger:
   if arg is set:
    if arg is "help" or "Help":
     message "&aCOMMANDS:"
-    message "1. &a/redstonesklib - basic info about this skript library"
-    message "2. &a/redstonesklib version - shows version info"
-    message "3. &a/redstonesklib help - shows this text"
+    message "1. &a/redstoneprosklib - basic info about this skript library"
+    message "2. &a/redstoneprosklib version - shows version info"
+    message "3. &a/redstoneprosklib help - shows this text"
+    message "4. &a/redstoneprosklib playercount - shows current server playercount"
+    message "5. &a/redstoneprosklib reload - reloads the skript"
    else if arg is "version" or "Version":
-    message "&aCurrent redstonesklib version: 1.0.1"
+    message "&aCurrent redstoneprosklib version: 1.0.2"
+   else if arg is "playercount" or "Playercount":
+    if {onlineplayers} is greater than 1:
+     message "&aThere are %{onlineplayers}% players online right now!"
+    else:
+     message "&aYou are the only one online :("
+   else if arg is "reload" or "Reload":
+    if player has permission "reload.rspsl":
+     message "&aReloaded the skript!"
+     make console execute command "/sk reload redstoneproskriptlib.sk"
   else:
    message "&aWelcome to redstonesklib! a skript library used for most of my skripts!"
-   message "&aVersion: 1.0.1"
+   message "&aVersion: 1.0.2"
    message "&aThis contains functions important for many of my future skripts."
  
 function brazil(player: player):
@@ -37,13 +52,13 @@ function heal(player: player, executor: player):
  send "&aHealed %{_player}%!" to {_executor}
  
 function math(a: number, b: number, op: text) :: number:
- if {_op} is "add":
+ if {_op} is "add" or "+":
   set {_mathv} to {_a} + {_b}
- else if {_op} is "sub":
+ else if {_op} is "sub" or "subtract" or "-":
   set {_mathv} to {_a} - {_b}
- else if {_op} is "mult":
+ else if {_op} is "mult" or "multiply" or "x" or "*":
   set {_mathv} to {_a} * {_b}
- else if {_op} is "div":
+ else if {_op} is "div" or "divide" or "/":
   set {_mathv} to {_a} / {_b}
  return {_mathv}
  
@@ -55,3 +70,27 @@ function tell(msg: text, player: player):
  
 function clearlag():
  make console execute command "/kill @e[type=item]"
+ 
+function teleportplayer(player: player, loc: location):
+ teleport {_player} to {_loc}
+ 
+function onlineplayers() :: number:
+ return {onlineplayers}
+ 
+function mute(player: player):
+ if {mute::%{_player}%} is true:
+  set {mute::%{_player}%} to false
+ else if {mute::%{_player}%} is false:
+  set {mute::%{_player}%} to true
+ else if {mute::%{_player}%} is not set:
+  set {mute::%{_player}%} to true
+  
+on chat:
+ if {mute::%{_player}%} is true:
+  cancel event
+  
+function clear(player: player):
+ clear {_player}'s inventory
+ 
+function bring(player1: player, player2: player):
+ teleport {_player1} to {_player2}
